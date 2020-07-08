@@ -1,0 +1,17 @@
+[package]
+name = "pam_zoftoken"
+version = "0.1.0"
+authors = ["Juan Colo <juan@genuinebee.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "pam_zoftoken"
+crate-type = ["cdylib"]
+
+[dependencies]
+pam = { path = "pam/" }
+reqwest = "0.7"
+syslog = "5.0.0"
+serde = {version = "1.0.114", features = ["derive"]}
