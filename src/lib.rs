@@ -6,11 +6,10 @@ extern crate syslog;
 
 use pam::constants::{PamFlag, PamResultCode};
 use pam::module::{PamHandle, PamHooks};
-use reqwest::{Client, Result};
+use reqwest::{Result};
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::ffi::CStr;
-use std::time::Duration;
 use syslog::{Facility, Formatter3164};
 
 #[derive(Deserialize)]
@@ -113,10 +112,8 @@ impl PamHooks for PamHttp {
 }
 
 fn get_url(url: &str) -> Result<ZoftokenResponse> {
-    let client = Client::builder()?
-        .timeout(Duration::from_secs(15))
-        .build()?;
-    client.get(url)?.send()?.json::<ZoftokenResponse>()
+    let result = reqwest::blocking::get(url)?.json::<ZoftokenResponse>()?;
+    Ok(result)
 }
 
 fn logger(msg: String, is_debug: bool) {
