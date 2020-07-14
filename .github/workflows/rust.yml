@@ -23,5 +23,4 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: target/release/libpam_zoftoken.dylib
           asset_name: pam_zoftoken-macos.dylib
-          tag: ${{ github.ref }}
           overwrite: true
